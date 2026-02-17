@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ramzan Kareem and Ghouse Azam Celebration - Good Days Inside">
+    <title>Good Days Inside - Ramzan & Ghouse Azam Celebration</title>
+    
+    <!-- Preconnect for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Load Arabic font -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Respect user motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2f3f, #0e1a26);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Click Hint */
+        .click-hint {
+            text-align: center;
+            margin: 20px 0;
+            color: #ffd700;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+            font-weight: bold;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Main Door Container */
+        .door-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: opacity 0.8s ease, visibility 0.8s ease, transform 0.8s ease;
+        }
+        
+        .door-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+            pointer-events: none;
+            position: absolute;
+        }
+        
+        /* Door Design */
+        .door {
+            position: relative;
+            width: 100%;
+            background: linear-gradient(145deg, #8b5a2b, #5d3a1a);
+            border-radius: 20px;
+            padding: 40px 20px;
+            box-shadow: 
+                0 30px 40px rgba(0,0,0,0.6),
+                inset 0 0 30px rgba(255,215,0,0.3);
+            border: 8px solid #b8860b;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Door Panels */
+        .door-panel {
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            width: 40px;
+            background: linear-gradient(to right, #c19a6b, #a0522d);
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .panel-left {
+            left: 20px;
+        }
+        
+        .panel-right {
+            right: 20px;
+        }
+        
+        /* Door Handle */
+        .door-handle {
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
+            border-radius: 50%;
+            box-shadow: 
+                0 5px 10px rgba(0,0,0,0.5),
+                inset 0 -3px 5px rgba(0,0,0,0.3),
+                0 0 20px gold;
+            border: 4px solid #daa520;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #8b4513;
+            font-size: 32px;
+            animation: glow 2s infinite;
+            z-index: 10;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 5px 15px rgba(255,215,0,0.5), inset 0 -3px 5px rgba(0,0,0,0.3), 0 0 20px gold; }
+            50% { box-shadow: 0 5px 25px rgba(255,215,0,0.9), inset 0 -3px 5px rgba(0,0,0,0.3), 0 0 30px gold; }
+        }
+        
+        /* Door Text */
+        .door-text {
+            text-align: center;
+            color: #fff4c2;
+            padding: 20px;
+            margin: 0 40px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .good-days-text {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.2;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffd700, #fff0b5, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                0 0 20px #ffd700,
+                0 0 40px #ffaa00;
+            border: 6px solid rgba(255,215,0,0.7);
+            padding: 50px 30px;
+            border-radius: 40px;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            margin-bottom: 30px;
+            box-shadow: 0 0 40px rgba(255,215,0,0.5);
+        }
+        
+        .click-to-enter {
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            color: #ffd700;
+            margin-top: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            animation: pulse 1.5s infinite;
+            background: rgba(0,0,0,0.5);
+            padding: 20px 40px;
+            border-radius: 60px;
+            display: inline-block;
+            border: 4px solid #ffd700;
+            box-shadow: 0 0 30px gold;
+            letter-spacing: 2px;
+            backdrop-filter: blur(5px);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px gold; }
+            50% { transform: scale(1.05); box-shadow: 0 0 50px gold; }
+        }
+        
+        .moon-star {
+            font-size: clamp(3rem, 8vw, 6rem);
+            filter: drop-shadow(0 0 20px gold);
+            margin-bottom: 30px;
+        }
+        
+        /* Inside the Door Content */
+        .inside-content {
+            position: relative;
+            background: linear-gradient(145deg, #2c1810, #1f0f09);
+            border-radius: 20px;
+            padding: 40px;
+            border: 6px solid #b8860b;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.8), inset 0 0 50px rgba(255,215,0,0.1);
+            min-height: 600px;
+            display: none;
+            animation: fadeIn 0.8s ease;
+            z-index: 10;
+        }
+        
+        .inside-content.visible {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Celebration Sections */
+        .celebration-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            border-left: 8px solid #ffd700;
+        }
+        
+        .section-title {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        
+        .arabic-text {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+            margin: 25px 0;
+            color: #ffd700;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255,215,0,0.7);
+            direction: rtl;
+            line-height: 1.8;
+        }
+        
+        .greeting-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            backdrop-filter: blur(5px);
+        }
+        
+        .ramadan-info {
+            background: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 2px dashed #ffd700;
+        }
+        
+        .ramadan-facts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+        
+        .fact-item {
+            background: rgba(255,215,0,0.1);
+            padding: 15px 25px;
+            border-radius: 50px;
+            color: #ffd700;
+            font-size: 1.1rem;
+            border: 1px solid #b8860b;
+        }
+        
+        .dua-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(145deg, #4a2a1a, #3a1e12);
+            border-radius: 15px;
+        }
+        
+        .dua-text {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: #fff;
+            font-family: 'Amiri', 'Scheherazade New', serif;
+            margin: 20px 0;
+            direction: rtl;
+            line-height: 1.8;
+        }
+        
+        .lights {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .light {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #ff8c00);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: swing 4s infinite;
+            transform-origin: top center;
+        }
+        
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        /* Reset Button - Hidden by default */
+        .reset-btn {
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .reset-btn.visible {
+            display: block;
+        }
+        
+        .reset-button {
+            background: linear-gradient(145deg, #b8860b, #8b5a2b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            border: 2px solid #ffd700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .reset-button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(145deg, #daa520, #b8860b);
+        }
+        
+        .reset-button:focus-visible {
+            outline: 3px solid #ffd700;
+            outline-offset: 3px;
+        }
+        
+        /* Welcome section improvements */
+        .welcome-header h1 {
+            color: #ffd700;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin: 20px 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .door { min-height: 400px; padding: 30px 15px; }
+            .door-panel { width: 30px; }
+            .panel-left { left: 15px; }
+            .panel-right { right: 15px; }
+            .door-handle { 
+                width: 50px; 
+                height: 50px; 
+                font-size: 24px;
+                right: 45px;
+            }
+            .good-days-text { padding: 30px 15px; letter-spacing: 2px; }
+            .click-to-enter { padding: 15px 25px; }
+            .inside-content { padding: 20px; min-height: auto; }
+            .celebration-section { padding: 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            .door { min-height: 350px; }
+            .click-hint { font-size: 1.2rem; }
+            .fact-item { font-size: 0.9rem; padding: 10px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Click Hint -->
+        <div class="click-hint" id="clickHint">
+            🔔 Click the Door to See What's Inside 🔔
+        </div>
+        
+        <!-- Door Section -->
+        <div class="door-container" id="doorContainer" onclick="openDoor()" role="button" tabindex="0" 
+             aria-label="Click to open the door and see the celebration inside" onkeydown="if(event.key==='Enter'||event.key===' ')openDoor()">
+            <div class="door">
+                <div class="door-panel panel-left"></div>
+                <div class="door-panel panel-right"></div>
+                
+                <div class="door-text">
+                    <div class="moon-star" aria-hidden="true">
+                        🌙 ⭐ ✨
+                    </div>
+                    
+                    <div class="good-days-text">
+                        GOOD<br>DAYS<br>INSIDE
+                    </div>
+                    
+                    <div class="click-to-enter">
+                        ⬇️ Click to Enter ⬇️
+                    </div>
+                </div>
+                
+                <div class="door-handle" aria-hidden="true">
+                    ⚜️
+                </div>
+            </div>
+        </div>
+        
+        <!-- Inside Content -->
+        <div class="inside-content" id="insideContent" role="main" aria-label="Celebration content">
+            <div class="lights" aria-hidden="true">
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+            </div>
+            
+            <!-- Welcome Message -->
+            <div class="welcome-header" style="text-align: center; margin-bottom: 30px;">
+                <span style="font-size: 3rem;" aria-hidden="true">✨ 🕌 ✨</span>
+                <h1>Assalamu Alaikum Wa Rahmatullahi Wa Barakatuhu</h1>
+                <p style="color: #fff; font-size: 1.3rem;">Welcome to the Celebration of Blessed Days</p>
+            </div>
+            
+            <!-- Ramzan Kareem Mubarak Section -->
+            <div class="celebration-section">
+                <h2 class="section-title">🌟 Ramzan Kareem Mubarak 🌟</h2>
+                
+                <div class="arabic-text" lang="ar" dir="rtl">
+                    رمضان كريم مبارك
+                </div>
+                
+                <div class="greeting-card">
+                    <p style="color: #ffd700; font-size: 1.5rem; text-align: center; margin-bottom: 15px;">
+                        Ramzan Kareem Mubarak to you and your family!
+                    </p>
+                    <p style="color: #fff; font-size: 1.2rem; text-align: center;">
+                        May this blessed month bring peace, prosperity, and countless blessings to your life.
+                    </p>
+                </div>
+                
+                <div class="ramadan-info">
+                    <div class="ramadan-facts">
+                        <span class="fact-item">🌙 Month of Quran</span>
+                        <span class="fact-item">🤲 Month of Mercy</span>
+                        <span class="fact-item">📖 Laylat-ul-Qadr</span>
+                        <span class="fact-item">🕋 Night of Power</span>
+                        <span class="fact-item">💝 Zakat & Charity</span>
+                        <span class="fact-item">🤲 Forgiveness</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ghouse Azam Dastagir Section -->
+            <div class="celebration-section">
+                <h2 class="section-title">🌟 Youm e Wiladat Hazrat Ghouse Ul Azam Dastagir 🌟</h2>
+                
+                <div class="arabic-text" lang="ar" dir="rtl">
+                    عيد ميلاد غوث أعظم دستگیر
+                </div>
+                
+                <div class="arabic-text" style="font-size: 2rem; margin-top: 0;" lang="ar" dir="rtl">
+                    رضي الله تعالى عنه مبارك
+                </div>
+                
+                <div class="greeting-card">
+                    <p style="color: #fff; font-size: 1.3rem; text-align: center;">
+                        Hazrat Syed Abdul Qadir Jilani (Radi Allah Tala Anha)
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Special Prayers Section -->
+            <div class="dua-section">
+                <h2 style="color: #ffd700; margin-bottom: 20px;">🤲 Special Duas for These Blessed Days</h2>
+                <div class="dua-text" lang="ar" dir="rtl">
+                    اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي
+                </div>
+                <p style="color: #fff; font-size: 1.2rem;">
+                    "Allahumma innaka 'afuwwun tuhibbul 'afwa fa'fu 'anni"
+                </p>
+                <p style="color: #ffd700; font-size: 1.1rem; margin-bottom: 20px;">
+                    "O Allah, You are Forgiving and love forgiveness, so forgive me"
+                </p>
+                
+                <div style="margin-top: 30px;">
+                    <p style="color: #ffd700; font-size: 1.3rem;">
+                        May Allah accept our prayers and grant us all the blessings of these holy days.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Final Greetings -->
+            <div style="text-align: center; margin: 40px 0;">
+                <p style="color: #ffd700; font-size: 2rem; font-weight: bold; margin-bottom: 20px;">
+                    Ramzan Kareem Mubarak!
+                </p>
+                <p style="color: #ffd700; font-size: 1.8rem; font-weight: bold; margin-bottom: 20px;">
+                    Youm e Wiladat Hazrat Ghouse Ul Azam Dastagir Mubarak!
+                </p>
+                <div style="font-size: 3rem; margin: 30px 0;" aria-hidden="true">
+                    🌙 ⭐ ✨ 🕌 ✨ ⭐ 🌙
+                </div>
+                <p style="color: #fff; font-size: 1.3rem;">
+                    Indeed, these are the Good Days Inside!
+                </p>
+            </div>
+        </div>
+        
+        <!-- Reset Button -->
+        <div class="reset-btn" id="resetBtn">
+            <button class="reset-button" onclick="resetDoor()" aria-label="Go back to the door">
+                🔐 Go Back to the Door
+            </button>
+        </div>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="backgroundSong" loop preload="auto">
+        <source src="https://files.catbox.moe/wcsu6x.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function openDoor() {
+            const doorContainer = document.getElementById('doorContainer');
+            const clickHint = document.getElementById('clickHint');
+            const insideContent = document.getElementById('insideContent');
+            const resetBtn = document.getElementById('resetBtn');
+            const song = document.getElementById('backgroundSong');
+            
+            doorContainer.classList.add('hidden');
+            clickHint.style.display = 'none';
+            insideContent.classList.add('visible');
+            resetBtn.classList.add('visible');
+            
+            // Play song with better error handling
+            if (song) {
+                const playPromise = song.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Audio playback prevented:", error);
+                        // User interaction required - could show a manual play button here
+                    });
+                }
+            }
+            
+            // Focus management for accessibility
+            insideContent.setAttribute('tabindex', '-1');
+            insideContent.focus();
+        }
+        
+        function resetDoor() {
+            const doorContainer = document.getElementById('doorContainer');
+            const clickHint = document.getElementById('clickHint');
+            const insideContent = document.getElementById('insideContent');
+            const resetBtn = document.getElementById('resetBtn');
+            const song = document.getElementById('backgroundSong');
+            
+            doorContainer.classList.remove('hidden');
+            clickHint.style.display = 'block';
+            insideContent.classList.remove('visible');
+            resetBtn.classList.remove('visible');
+            
+            // Pause and reset song
+            if (song) {
+                song.pause();
+                song.currentTime = 0;
+            }
+            
+            // Return focus to door for accessibility
+            doorContainer.setAttribute('tabindex', '-1');
+            doorContainer.focus();
+        }
+        
+        // Preload audio on user interaction with document
+        document.addEventListener('click', function initAudio() {
+            const song = document.getElementById('backgroundSong');
+            if (song && song.readyState === 0) {
+                song.load();
+            }
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+    </script>
+</body>
+</html>
